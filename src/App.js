@@ -1,25 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import * as React from "react";
+import "./App.css";
+import { Header } from "./components/Headers";
+import { Headline } from "./components/Headline";
+import { PostListContainer } from "./components/PostListContainer";
 
-function App() {
+/**
+ *
+ * @type {React.FC}
+ */
+
+export const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <body>
+      <div>
+        <Header title="掲示板" />
+        <Headline headlineName="新着スレッド" />
+        <PostListContainer />
+      </div>
+    </body>
   );
-}
-
-export default App;
+};
