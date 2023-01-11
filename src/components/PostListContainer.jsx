@@ -20,11 +20,17 @@ export const PostListContainer = () => {
       const response = await axios.get(
         "https://virtserver.swaggerhub.com/INFO_3/BulletinBoardApplication/1.0.0/threads/1/posts?offset=0"
       );
-      const fetchedData = await response.data.posts.post;
-      if (fetchedData.length != "empty") {
-        setPostList(fetchedData);
-      } else {
+      const fetchedData = await response.data.posts;
+      const fetchedDataList = [];
+      fetchedData.map((e) => {
+        fetchedDataList.push(e["post"]);
+      });
+      console.log(fetchedDataList);
+      console.log(typeof fetchedDataList);
+      if (fetchedDataList.length == 1) {
         return;
+      } else {
+        setPostList(fetchedDataList);
       }
     };
     fetchList();
@@ -34,10 +40,12 @@ export const PostListContainer = () => {
     <div>
       {postList.map((onepost) => {
         return (
-          <table>
-            <tr key={onepost}>
-              <p className="insideTableParagraph">{onepost}</p>
-            </tr>
+          <table key={onepost}>
+            <tbody>
+              <tr >
+                <td  className="insideTableParagraph">{onepost}</td>
+              </tr>
+            </tbody>
           </table>
         );
       })}
