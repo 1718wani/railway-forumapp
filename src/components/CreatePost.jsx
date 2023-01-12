@@ -5,16 +5,23 @@ import axios from "axios";
 
 export const CreatePost = () => {
   const [post, setPost] = useState("");
-
   const data = {
-    "post": "ダミーポスト",
-  };
+    id:"jifjiejife",
+    title:"ダミーポスト"
+  }
+  console.log(typeof data)
 
-  const onClickPostButton = () => {
-    axios.post(
-      "https://virtserver.swaggerhub.com/INFO_3/BulletinBoardApplication/1.0.0/threads/1/posts",
-      data
+  const onClickPostButton = async () => {
+    
+    await axios.post(
+      "https://virtserver.swaggerhub.com/INFO_3/BulletinBoardApplication/1.0.0/threads",
+      data,{
+        headers:{
+            'Content-Type': 'application/json'
+          }
+      }     
     );
+    console.log(data)
   };
 
   return (

@@ -18,13 +18,14 @@ export const PostListContainer = () => {
   useEffect(() => {
     const fetchList = async () => {
       const response = await axios.get(
-        "https://virtserver.swaggerhub.com/INFO_3/BulletinBoardApplication/1.0.0/threads/1/posts?offset=0"
+        "https://virtserver.swaggerhub.com/INFO_3/BulletinBoardApplication/1.0.0/threads?offset=10'"
       );
-      const fetchedData = await response.data.posts;
+      const fetchedData = await response.data;
       const fetchedDataList = [];
       fetchedData.map((e) => {
-        fetchedDataList.push(e["post"]);
+        fetchedDataList.push(e["title"]);
       });
+      console.log(fetchedData)
       console.log(fetchedDataList);
       console.log(typeof fetchedDataList);
       if (fetchedDataList.length == 1) {
