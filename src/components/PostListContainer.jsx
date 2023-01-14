@@ -4,34 +4,22 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 export const PostListContainer = () => {
-  const [postList, setPostList] = useState([
-    "以下はリストが0のときだけ表示されるダミーデータです。",
-    "推しについて語るスレ",
-    "今期覇権アニメ",
-    "TechTrainってどうなの？",
-    "暇な人雑談しませんか",
-    "Rustについて語るスレ",
-    "自宅警備員だけどなんか質問ある？",
-    "大阪でおすすめのラーメン教えて",
-  ]);
+  const [postList, setPostList] = useState([]);
 
   useEffect(() => {
     const fetchList = async () => {
-      const response = await axios.get(
-        "https://virtserver.swaggerhub.com/INFO_3/BulletinBoardApplication/1.0.0/threads?offset=10'"
-      );
-      const fetchedData = await response.data;
-      const fetchedDataList = [];
-      fetchedData.map((e) => {
-        fetchedDataList.push(e["title"]);
-      });
-      console.log(fetchedData)
-      console.log(fetchedDataList);
-      console.log(typeof fetchedDataList);
-      if (fetchedDataList.length == 1) {
-        return;
-      } else {
+      try {
+        const response = await axios.get(
+          "https://2y6i6tqn41.execute-api.ap-northeast-1.amazonaws.com/threads?offset=0"
+        );
+        const fetchedData = await response.data;
+        const fetchedDataList = [];
+        fetchedData.map((e) => {
+          fetchedDataList.push(e["title"]);
+        });
         setPostList(fetchedDataList);
+      } catch (e) {
+        console.log("error");
       }
     };
     fetchList();
@@ -39,17 +27,17 @@ export const PostListContainer = () => {
 
   return (
     <div>
-      {postList.map((onepost) => {
-        return (
-          <table key={onepost}>
-            <tbody>
-              <tr >
-                <td  className="insideTableParagraph">{onepost}</td>
+      <table>
+        <tbody>
+          {postList.map((onepost) => {
+            return (
+              <tr key={onepost}>
+                <td className="insideTableParagraph">{onepost}</td>
               </tr>
-            </tbody>
-          </table>
-        );
-      })}
+            );
+          })}
+        </tbody>
+      </table>
     </div>
   );
 };
