@@ -32,7 +32,7 @@ export const ThreadListContainer = () => {
           {threadList.map((onethread) => {
             return (
               <tr key={onethread}>
-                <td className="insideTableParagraph">{onethread}<button>スレッド詳細を見る</button></td>
+                <td className="insideTableParagraph">{onethread}<button >スレッド詳細を見る</button></td>
               </tr>
             );
           })}
