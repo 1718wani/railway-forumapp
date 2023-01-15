@@ -1,6 +1,7 @@
 import { Header } from "../components/Header";
 import { Headline } from "../components/Headline";
 import { ThreadListContainer } from "../components/ThreadListContainer";
+import * as React from 'react';
 
 const Home = () => {
   return (
