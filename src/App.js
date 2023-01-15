@@ -1,7 +1,6 @@
 import * as React from "react";
 import "./App.css";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
-
+import { Route, Routes} from "react-router-dom";
 import Home from './routes/Home';
 import ThreadNew from './routes/ThreadNew';
 import NotFound from './routes/NotFound';
@@ -12,22 +11,16 @@ import NotFound from './routes/NotFound';
  * @type {React.FC}
  */
 
-export const App = () => {
+const App = () => {
   return (
-    <BrowserRouter>
-      <div>
-        <Switch>
-          <Route exact path="/">
-            <Home />
-          </Route>
-          <Route path="/thread/new/">
-            <ThreadNew />
-          </Route>
-          <Route>
-            <NotFound />
-          </Route>
-        </Switch>
+      <div className="App">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/thread/new" element={<ThreadNew />} />
+          <Route element={<NotFound />} />
+        </Routes>  
       </div>
-    </BrowserRouter>
   );
 };
+
+export default App;
