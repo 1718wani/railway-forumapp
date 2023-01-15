@@ -3,8 +3,8 @@ import "./App.css";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { Header } from "./components/Headers";
 import { Headline } from "./components/Headline";
-import { PostListContainer } from "./components/PostListContainer";
-import { CreatePost } from "./components/CreatePost";
+import { ThreadListContainer } from "./components/ThreadListContainer";
+import { CreateThread } from "./components/CreateThread";
 
 /**
  *
@@ -40,7 +40,7 @@ const Home = () => {
         buttonNameofMovetoPost="スレッドをたてる"
       />
       <Headline headlineName="新着スレッド" />
-      <PostListContainer />
+      <ThreadListContainer />
     </div>
   );
 };
@@ -49,7 +49,7 @@ const ThreadNew = () => {
   return (
     <div>
       <Header title="投稿ページです" />
-      <CreatePost />
+      <CreateThread />
     </div>
   );
 };

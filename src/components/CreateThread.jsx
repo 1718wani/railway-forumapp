@@ -3,13 +3,13 @@ import { useState } from "react";
 //プロジェクト配下で良かったのか？
 import axios from "axios";
 
-export const CreatePost = () => {
-  const [post, setPost] = useState({ title: "" });
+export const CreateThread = () => {
+  const [thread, setThread] = useState({ title: "" });
 
   const onClickPostButton = async () => {
     await axios.post(
       "https://2y6i6tqn41.execute-api.ap-northeast-1.amazonaws.com/threads",
-      post,
+      thread,
       {
         headers: {
           "Content-Type": "application/json",
@@ -25,8 +25,8 @@ export const CreatePost = () => {
         <textarea
           id="textarea"
           placeholder="ここに書いてください"
-          value={post.title}
-          onChange={(e) => setPost({ title: e.target.value })}
+          value={thread.title}
+          onChange={(e) => setThread({ title: e.target.value })}
         ></textarea>
       </label>
       <input type="submit" value="投稿する"></input>

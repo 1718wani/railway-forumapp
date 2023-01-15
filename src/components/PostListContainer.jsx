@@ -1,38 +1,36 @@
 import * as React from "react";
 import { useEffect, useState } from "react";
-//プロジェクト配下で良かったのか？
-import axios from "axios";
 
-export const PostListContainer = () => {
+export const PostListContainer = (props) => {
   const [postList, setPostList] = useState([]);
 
   useEffect(() => {
-    const fetchList = async () => {
+    const fetchPostList = async () => {
       try {
         const response = await axios.get(
-          "https://2y6i6tqn41.execute-api.ap-northeast-1.amazonaws.com/threads?offset=0"
+          `https://2y6i6tqn41.execute-api.ap-northeast-1.amazonaws.com/threads/${props.threadId}/posts?offset=0`
         );
-        const fetchedData = await response.data;
-        const fetchedDataList = [];
-        fetchedData.map((e) => {
-          fetchedDataList.push(e["title"]);
+        const fetchedPostData = await response.data;
+        const fetchedPostDataList = [];
+        fetchedPostData.map((e) => {
+          fetchedPostDataList.push(e["post"]);
         });
-        setPostList(fetchedDataList);
+        setPostList(fetchedPostDataList)
       } catch (e) {
-        console.log("error");
+        console.log(e);
       }
+      fetchPostList();
     };
-    fetchList();
-  }, []);
+  });
 
   return (
     <div>
       <table>
         <tbody>
-          {postList.map((onepost) => {
+          {postList.map((onePost) => {
             return (
-              <tr key={onepost}>
-                <td className="insideTableParagraph">{onepost}</td>
+              <tr key={onePost}>
+                <td className="insideTableParagraph">{onePost}</td>
               </tr>
             );
           })}
