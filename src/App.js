@@ -4,7 +4,7 @@ import { Route, Routes } from "react-router-dom";
 import Home from "./routes/Home";
 import ThreadNew from "./routes/ThreadNew";
 import NotFound from "./routes/NotFound";
-import Thread from "./routes/Threads";
+import Thread from "./routes/Thread";
 import Threads from "./routes/Threads";
 
 /**

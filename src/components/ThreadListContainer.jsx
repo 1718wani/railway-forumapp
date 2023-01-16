@@ -2,9 +2,11 @@ import * as React from "react";
 import { useEffect, useState } from "react";
 //プロジェクト配下で良かったのか？
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 export const ThreadListContainer = () => {
   const [threadList, setThreadList] = useState([]);
+  const [dataListObject, setDataListObject] = useState();
 
   useEffect(() => {
     const fetchList = async () => {
@@ -13,6 +15,8 @@ export const ThreadListContainer = () => {
           "https://2y6i6tqn41.execute-api.ap-northeast-1.amazonaws.com/threads?offset=0"
         );
         const fetchedData = await response.data;
+        setDataListObject(fetchedData)
+        console.log(fetchedData)
         const fetchedDataList = [];
         fetchedData.map((e) => {
           fetchedDataList.push(e["title"]);
@@ -27,12 +31,16 @@ export const ThreadListContainer = () => {
 
   return (
     <div>
+      
       <table>
         <tbody>
           {threadList.map((onethread) => {
             return (
               <tr key={onethread}>
-                <td className="insideTableParagraph">{onethread}<button >スレッド詳細を見る</button></td>
+                <td className="insideTableParagraph">
+                  {onethread}
+                  <Link to={`/threads/${dataListObject.find(({title}) => title === onethread ).id}`}>スレッド詳細を見る</Link>  
+                </td>
               </tr>
             );
           })}
