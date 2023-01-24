@@ -26,7 +26,8 @@ export const PostListContainer = (props) => {
     fetchPostList();
   }, []);
 
-  const onClickmakePostButton = async () => {
+  const onClickmakePostButton = async (e) => {
+    e.preventDefault();
     await axios.post(
         `https://2y6i6tqn41.execute-api.ap-northeast-1.amazonaws.com/threads/${props.threadId}/posts`,
       newPost,
@@ -48,6 +49,7 @@ export const PostListContainer = (props) => {
             placeholder="ここに書いてください"
             value={newPost.post}
             onChange={(e) => setNewPost({ post: e.target.value })}
+            required
           ></textarea>
         </label>
         <input type="submit" value="ポストする"></input>

@@ -1,14 +1,14 @@
 import * as ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
+import { RecoilRoot } from "recoil";
 import App from "./App";
-import { ChosenThreadStatusProvider } from "./components/providers/ChosenThreadStatusProvider";
+
 
 ReactDOM.render(
-  <ChosenThreadStatusProvider>
+  <RecoilRoot>
     <BrowserRouter>
       <App />
     </BrowserRouter>
-  </ChosenThreadStatusProvider>,
-
+  </RecoilRoot>,
   document.getElementById("root")
 );

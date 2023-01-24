@@ -30,3 +30,8 @@ table,tr {
   background-color: aliceblue;
 }
 
+.link{
+  display: flex;
+  justify-content: flex-end;
+}
+
