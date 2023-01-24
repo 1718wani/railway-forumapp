@@ -1,12 +1,19 @@
 import * as React from "react";
-import { useEffect, useState } from "react";
+import { useEffect, useState,useContext } from "react";
 //プロジェクト配下で良かったのか？
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { ChosenThreadStatusContext } from "./providers/ChosenThreadStatusProvider";
+
+
 
 export const ThreadListContainer = () => {
   const [threadList, setThreadList] = useState([]);
   const [dataListObject, setDataListObject] = useState();
+  const {fetchedThreadObjList, setFetchedThreadObjList} = useContext(ChosenThreadStatusContext)
+  console.log(dataListObject)
+  console.log(fetchedThreadObjList)
+
 
   useEffect(() => {
     const fetchList = async () => {
@@ -22,11 +29,13 @@ export const ThreadListContainer = () => {
           fetchedDataList.push(e["title"]);
         });
         setThreadList(fetchedDataList);
+        
       } catch (e) {
         console.log("error");
       }
     };
     fetchList();
+    setFetchedThreadObjList(dataListObject);
   }, []);
 
   return (

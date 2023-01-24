@@ -6,6 +6,7 @@ import axios from "axios";
 export const CreateThread = () => {
   const [thread, setThread] = useState({ title: "" });
 
+
   const onClickPostButton = async () => {
     await axios.post(
       "https://2y6i6tqn41.execute-api.ap-northeast-1.amazonaws.com/threads",
@@ -26,7 +27,9 @@ export const CreateThread = () => {
           id="textarea"
           placeholder="ここに書いてください"
           value={thread.title}
-          onChange={(e) => setThread({ title: e.target.value })}
+          onChange={(e) => { 
+            setThread({ title: e.target.value })
+        }}
         ></textarea>
       </label>
       <input type="submit" value="投稿する"></input>
