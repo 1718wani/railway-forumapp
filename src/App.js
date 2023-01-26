@@ -6,6 +6,8 @@ import ThreadNew from "./routes/ThreadNew";
 import NotFound from "./routes/NotFound";
 import Thread from "./routes/Thread";
 import Threads from "./routes/Threads";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 /**
  *
@@ -15,6 +17,18 @@ import Threads from "./routes/Threads";
 const App = () => {
   return (
     <div className="App">
+      <ToastContainer
+        position="bottom-right"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/thread/new" element={<ThreadNew />} />

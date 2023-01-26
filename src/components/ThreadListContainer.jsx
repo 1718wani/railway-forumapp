@@ -3,7 +3,7 @@ import { useEffect, useState, useContext } from "react";
 //プロジェクト配下で良かったのか？
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { useRecoilState, useSetRecoilState } from "recoil";
+import { useSetRecoilState } from "recoil";
 import { fetchedThreadObjListAtom } from "../atoms/Atoms";
 
 export const ThreadListContainer = () => {

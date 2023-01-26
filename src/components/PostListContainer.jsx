@@ -1,6 +1,7 @@
 import * as React from "react";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { toast } from 'react-toastify';
 
 export const PostListContainer = (props) => {
   const [postList, setPostList] = useState([]);
@@ -24,10 +25,11 @@ export const PostListContainer = (props) => {
       }
     };
     fetchPostList();
-  }, []);
+  }, [postList]);
 
   const onClickmakePostButton = async (e) => {
     e.preventDefault();
+    toast.success('投稿が完了しました!')
     await axios.post(
         `https://2y6i6tqn41.execute-api.ap-northeast-1.amazonaws.com/threads/${props.threadId}/posts`,
       newPost,
@@ -38,6 +40,8 @@ export const PostListContainer = (props) => {
       }
     );
   };
+
+  
 
   return (
     <div>
