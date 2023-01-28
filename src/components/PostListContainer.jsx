@@ -1,11 +1,13 @@
 import * as React from "react";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
 
 export const PostListContainer = (props) => {
+    // そのままの形でもっておいていい
   const [postList, setPostList] = useState([]);
-  const [newPost, setNewPost] = useState({post: ""})
+  // textareaのvalueをPostになるので、
+  const [newPost, setNewPost] = useState({ post: "" });
 
   useEffect(() => {
     const fetchPostList = async () => {
@@ -15,23 +17,20 @@ export const PostListContainer = (props) => {
         );
         const fetchedPostData = await response.data.posts;
         console.log(fetchedPostData.posts);
-        const fetchedPostDataList = [];
-        fetchedPostData.map((e) => {
-          fetchedPostDataList.push(e["post"]);
-        });
-        setPostList(fetchedPostDataList);
+        const postList = fetchedPostData.map((e) => e["post"])
+
+        setPostList(postList);
       } catch (e) {
         console.log(e);
       }
     };
     fetchPostList();
-  }, [postList]);
+  });
 
   const onClickmakePostButton = async (e) => {
     e.preventDefault();
-    toast.success('投稿が完了しました!')
     await axios.post(
-        `https://2y6i6tqn41.execute-api.ap-northeast-1.amazonaws.com/threads/${props.threadId}/posts`,
+      `https://2y6i6tqn41.execute-api.ap-northeast-1.amazonaws.com/threads/${props.threadId}/posts`,
       newPost,
       {
         headers: {
@@ -39,9 +38,10 @@ export const PostListContainer = (props) => {
         },
       }
     );
+    // Try catch の場合この行に書く
+    toast.success("投稿が完了しました!");
+    setNewPost({ post: "" });
   };
-
-  
 
   return (
     <div>

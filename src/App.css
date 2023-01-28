@@ -18,7 +18,12 @@ body {
   text-align: center;
 }
 
-table,tr {
+table{
+  margin: auto;
+}
+
+tr,td {
+  text-align: center;
   border:1px solid #333;
   width: 300px;
   margin-left: auto;
