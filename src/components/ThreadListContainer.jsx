@@ -1,10 +1,10 @@
 import * as React from "react";
 import { useEffect, useState, useContext } from "react";
-//プロジェクト配下で良かったのか？
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
 import { fetchedThreadObjListAtom } from "../atoms/Atoms";
+import { baseUrl } from "../const";
 
 export const ThreadListContainer = () => {
   const [threadList, setThreadList] = useState([]);
@@ -15,7 +15,7 @@ export const ThreadListContainer = () => {
     const fetchList = async () => {
       try {
         const response = await axios.get(
-          "https://2y6i6tqn41.execute-api.ap-northeast-1.amazonaws.com/threads?offset=0"
+          `${baseUrl}threads?offset=0`
         );
         const fetchedData = await response.data;
         setDataListObject(fetchedData);
