@@ -5,10 +5,10 @@ import { toast } from "react-toastify";
 import { baseUrl } from "../const";
 
 export const PostListContainer = (props) => {
-    // そのままの形でもっておいていい
+  // APIの形のままで持っている。
   const [postList, setPostList] = useState([]);
-  // textareaのvalueをPostになるので、
-  const [newPost, setNewPost] = useState({ post: "" });
+  // textareaのvalueをPostにわたすのでこの形に
+  const [newPost, setNewPost] = useState("");
 
   useEffect(() => {
     const fetchPostList = async () => {
@@ -17,10 +17,7 @@ export const PostListContainer = (props) => {
           `${baseUrl}threads/${props.threadId}/posts?offset=0`
         );
         const fetchedPostData = await response.data.posts;
-        console.log(fetchedPostData.posts);
-        const postList = fetchedPostData.map((e) => e["post"])
-
-        setPostList(postList);
+        setPostList(fetchedPostData)
       } catch (e) {
         console.log(e);
       }
@@ -30,18 +27,22 @@ export const PostListContainer = (props) => {
 
   const onClickmakePostButton = async (e) => {
     e.preventDefault();
-    await axios.post(
-      `${baseUrl}threads/${props.threadId}/posts`,
-      newPost,
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
-    // Try catch の場合この行に書く
+    try{
+      await axios.post(
+        `${baseUrl}threads/${props.threadId}/posts`,
+        {post: newPost},
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+    }catch(e){
+      console.log(e)
+    }
+    // 投稿成功時はtextareの中身を空にする
+    setNewPost("");
     toast.success("投稿が完了しました!");
-    setNewPost({ post: "" });
   };
 
   return (
@@ -52,8 +53,8 @@ export const PostListContainer = (props) => {
           <textarea
             id="textarea"
             placeholder="ここに書いてください"
-            value={newPost.post}
-            onChange={(e) => setNewPost({ post: e.target.value })}
+            value={newPost}
+            onChange={(e) => setNewPost(e.target.value)}
             required
           ></textarea>
         </label>
@@ -62,10 +63,10 @@ export const PostListContainer = (props) => {
 
       <table>
         <tbody>
-          {postList.map((onePost) => {
+          {postList.map((oneObj) => {
             return (
-              <tr key={onePost}>
-                <td className="insideTableParagraph">{onePost}</td>
+              <tr key={oneObj.id}>
+                <td className="insideTableParagraph">{oneObj.post}</td>
               </tr>
             );
           })}

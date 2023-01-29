@@ -7,7 +7,6 @@ import { useRecoilValue } from "recoil";
 const Thread = () => {
   const Atom = useRecoilValue(fetchedThreadObjListAtom);
   console.log(Atom);
-
   const { threadId } = useParams();
 
   const chosenTitle = Atom.find(({ id }) => id === threadId).title;
